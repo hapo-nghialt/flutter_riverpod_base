@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:flutter/material.dart';
-import 'dart:math' as math;
-
 import 'package:riverpod_base/providers/photo_provider.dart';
 
 final counterProvider = StateProvider((ref) => '0');
@@ -12,7 +9,6 @@ class TimeScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final dataStreams = ref.watch(myStreamProvider);
-
     return Scaffold(
       appBar: AppBar(
         title: const Text('Streams'),

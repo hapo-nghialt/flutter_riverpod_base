@@ -26,7 +26,7 @@ class FutureScreen extends ConsumerWidget {
                       ),
                       data[i].thumbnailUrl.isNotEmpty
                           ? Image.network(
-                              'https://www.shutterstock.com/image-photo/surreal-image-african-elephant-wearing-260nw-1365289022.jpg',
+                              'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRRe5xJrGwCVXglXv9U0mxjA0ROxWeZlgQhyQ&usqp=CAU',
                               height: 96.0,
                               width: 96.0,
                               fit: BoxFit.cover,
