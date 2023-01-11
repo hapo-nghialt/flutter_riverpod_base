@@ -1,24 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:riverpod_base/providers/user_provider.dart';
+import 'package:riverpod_base/providers/post.provider.dart';
 
-class FormAddUser extends ConsumerStatefulWidget {
-  const FormAddUser({Key? key}) : super(key: key);
+class FormAddPost extends ConsumerStatefulWidget {
+  const FormAddPost({Key? key}) : super(key: key);
 
   @override
-  ConsumerState<ConsumerStatefulWidget> createState() => _FormAddUserState();
+  ConsumerState<ConsumerStatefulWidget> createState() => _FormAddPostState();
 }
 
-class _FormAddUserState extends ConsumerState<FormAddUser> {
-  final TextEditingController _userNameController = TextEditingController();
-  final TextEditingController _emailController = TextEditingController();
+class _FormAddPostState extends ConsumerState<FormAddPost> {
+  final TextEditingController _titleController = TextEditingController();
+  final TextEditingController _bodyController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: const Text("Form add User"),
+        title: const Text("Form add Post"),
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 5),
@@ -28,17 +28,19 @@ class _FormAddUserState extends ConsumerState<FormAddUser> {
               height: 10,
             ),
             TextField(
-              controller: _userNameController,
+              controller: _titleController,
               decoration: const InputDecoration(
-                  hintText: "Username", border: OutlineInputBorder()),
+                  hintText: "Title", border: OutlineInputBorder()),
             ),
             const SizedBox(
               height: 5,
             ),
             TextField(
-              controller: _emailController,
+              controller: _bodyController,
               decoration: const InputDecoration(
-                  hintText: "Email", border: OutlineInputBorder()),
+                hintText: "Body",
+                border: OutlineInputBorder(),
+              ),
             ),
             const SizedBox(
               height: 5,
@@ -46,8 +48,8 @@ class _FormAddUserState extends ConsumerState<FormAddUser> {
             TextButton(
               onPressed: () => {
                 ref
-                    .read(userCreateProvider.notifier)
-                    .addUser(_userNameController.text, _emailController.text)
+                    .read(postProvider.notifier)
+                    .addPost(_titleController.text, _bodyController.text),
               },
               child: const Text("Submit"),
             )
