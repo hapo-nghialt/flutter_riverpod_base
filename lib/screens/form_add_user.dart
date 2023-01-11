@@ -3,7 +3,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:riverpod_base/providers/user_provider.dart';
 
 class FormAddUser extends ConsumerStatefulWidget {
-  // const FormAddUser({super.key});
+  const FormAddUser({Key? key}) : super(key: key);
 
   @override
   ConsumerState<ConsumerStatefulWidget> createState() => _FormAddUserState();
