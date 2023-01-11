@@ -6,6 +6,10 @@ final postListProvider = FutureProvider.autoDispose((_) {
   return PostService().getPostList();
 });
 
+final postDetailProvider = FutureProvider.family((ref, id) {
+  return PostService().getPostDetail(id);
+});
+
 final postProvider =
     StateNotifierProvider.autoDispose<PostService, List<Post>>((ref) {
   return PostService();
@@ -19,4 +23,12 @@ final canGoToPreviousPageProvider = Provider<bool>((ref) {
 
 final canGoToForwardPageProvider = Provider<bool>((ref) {
   return ref.watch(pageIndexProvider) != 4;
+});
+
+final animalList = StateProvider<List<String>>((ref) => ['Dog', 'Cat', 'Elephant', 'Dinosaur', 'Fish']);
+
+final filterAnimalList = Provider<List<String>>((ref) {
+  final animals = ref.watch(animalList);
+
+  return animals.where((element) => element.length > 3).toList();
 });

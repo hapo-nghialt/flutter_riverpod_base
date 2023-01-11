@@ -19,8 +19,9 @@ class PaginateScreen extends ConsumerWidget {
       ref.read(pageIndexProvider.notifier).update((state) => state + 1);
     }
 
-    print('rebuild widget');
+    final filterAnimalData = ref.watch(filterAnimalList);
 
+    print('rebuild widget');
     return Scaffold(
       appBar: AppBar(),
       body: Column(

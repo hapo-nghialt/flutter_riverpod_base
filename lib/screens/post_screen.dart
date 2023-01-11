@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:riverpod_base/providers/post.provider.dart';
 import 'package:riverpod_base/screens/form_add_post.dart';
+import 'package:riverpod_base/screens/form_update_post.dart';
 
 class PostScreen extends ConsumerStatefulWidget {
   const PostScreen({Key? key}) : super(key: key);
@@ -34,39 +35,27 @@ class _PostScreenState extends ConsumerState<PostScreen> {
         child: postListData.when(
           data: (data) {
             return ListView.builder(
-                itemCount: data.length,
-                itemBuilder: (BuildContext context, int index) {
-                  return Container(
-                    height: 50,
-                    color:
-                        index % 2 == 0 ? Colors.amber[100] : Colors.green[100],
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 5),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: <Widget>[
-                          Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: <Widget>[
-                              Text(data[index].title),
-                              Text(data[index].body),
-                            ],
-                          ),
-                          TextButton(
-                            onPressed: () {
-                              ref
-                                  .read(postProvider.notifier)
-                                  .deletePost(data[index].id);
-                            },
-                            child: const Text("Delete"),
-                          ),
-                        ],
-                      ),
-                    ),
-                  );
-                });
+              itemCount: data.length,
+              itemBuilder: (BuildContext context, int index) {
+                return ListTile(
+                  title: Text(data[index].title),
+                  subtitle: Text(data[index].body),
+                  tileColor:
+                      index % 2 == 0 ? Colors.amber[100] : Colors.green[100],
+                  trailing: TextButton(
+                    onPressed: () {
+                      ref
+                          .read(postProvider.notifier)
+                          .deletePost(data[index].id);
+                    },
+                    child: const Text("Delete"),
+                  ),
+                  onTap: () {
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => FormUpdatePost(id: data[index].id)), );
+                  },
+                );
+              },
+            );
           },
           error: (error, stack) => Text(error.toString()),
           loading: () => const CircularProgressIndicator(),
